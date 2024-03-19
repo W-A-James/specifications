@@ -87,7 +87,7 @@
             },
             {
               "serverHeartbeatSucceededEvent": {
-                "awaited": false
+                "awaited": true
               }
             },
             {
@@ -262,7 +262,7 @@
             },
             {
               "serverHeartbeatSucceededEvent": {
-                "awaited": false
+                "awaited": true
               }
             },
             {

@@ -53,7 +53,7 @@ tests:
           - serverHeartbeatStartedEvent:
               awaited: False
           - serverHeartbeatSucceededEvent:
-              awaited: False
+              awaited: True
           - serverHeartbeatStartedEvent:
               awaited: True
 
@@ -118,7 +118,17 @@ tests:
       - *ping
       # Wait for the second serverHeartbeatStartedEvent to ensure we start streaming.
       - *waitForSecondHeartbeatStarted
-    expectEvents: *streamingStartedEvents
+    expectEvents:
+      - client: client
+        eventType: sdam
+        ignoreExtraEvents: true
+        events:
+          - serverHeartbeatStartedEvent:
+              awaited: False
+          - serverHeartbeatSucceededEvent:
+              awaited: True 
+          - serverHeartbeatStartedEvent:
+              awaited: True
 
   - description: "connect with serverMonitoringMode=stream <4.4"
     runOnRequirements:
@@ -170,4 +180,15 @@ tests:
       - *ping
       # Wait for the second serverHeartbeatStartedEvent to ensure we do not stream.
       - *waitForSecondHeartbeatStarted
-    expectEvents: *pollingStartedEvents
+    expectEvents:
+      - client: client
+        eventType: sdam
+        ignoreExtraEvents: true
+        events:
+          - serverHeartbeatStartedEvent:
+              awaited: False
+          - serverHeartbeatSucceededEvent:
+              awaited: False
+          - serverHeartbeatStartedEvent:
+              awaited: False
+
